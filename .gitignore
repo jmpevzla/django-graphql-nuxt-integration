@@ -1,0 +1,7 @@
+poll_proj/cnf/db.cnf
+poll_proj/misc/user
+**/__pycache__
+.vscode
+
+.env
+.user
