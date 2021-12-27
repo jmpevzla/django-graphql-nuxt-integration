@@ -35,6 +35,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'graphene_django',
+    'movies',
+    'graphene_schema',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -88,6 +91,10 @@ DATABASES = {
     }
 }
 
+# GraphQL
+GRAPHENE = {
+    'SCHEMA': 'graphene_schema.schema.schema'
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
