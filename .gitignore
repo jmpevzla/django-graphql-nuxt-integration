@@ -2,6 +2,7 @@ poll_proj/cnf/db.cnf
 poll_proj/misc/user
 **/__pycache__
 .vscode
+staticfiles
 
 .env
 .user
