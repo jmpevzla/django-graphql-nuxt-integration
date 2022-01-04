@@ -1,6 +1,15 @@
 <template>
   <div class="hello">
     <h2>{{ msg }}</h2>
+    <template v-if="result">
+      <div v-for="i of result.tasks" :key="i.id">
+        <ul>
+          <li>
+            <strong>{{i.name}}</strong>:<span>{{i.description}}</span>
+          </li>
+        </ul>
+      </div>
+    </template>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -31,10 +40,36 @@
 </template>
 
 <script>
+import { useQuery } from '@vue/apollo-composable'
+import gql from 'graphql-tag'
+import { watchEffect } from 'vue'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  setup() {
+     const { result } = useQuery(gql`
+      query {
+        tasks {
+          id
+          isDone
+          name
+          description
+        }
+      }
+    `)
+    
+    //const tasks = ref(result.value.data.tasks)
+
+    watchEffect(() => {
+      console.log(result.value)
+    })
+
+    return {
+      result
+    }
   }
 }
 </script>

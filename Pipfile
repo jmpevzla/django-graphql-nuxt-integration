@@ -10,6 +10,7 @@ graphene-django = "*"
 psycopg2 = "*"
 django-debug-toolbar = "*"
 django-webpack-loader = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

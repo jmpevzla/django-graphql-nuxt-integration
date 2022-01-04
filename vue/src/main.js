@@ -1,12 +1,17 @@
-import { createApp } from 'vue/dist/vue.esm-bundler'
+import { createApp 
+  //, provide 
+  , h } from 'vue/dist/vue.esm-bundler'
 import { createRouter, createWebHistory } from 'vue-router'
+import { DefaultApolloClient } from '@vue/apollo-composable'
+import apolloClient from './vue-apollo'
 import Index from './Index.vue'
 import App from './App.vue'
+import About from './About.vue'
 
 // 1. Define route components.
 // These can be imported from other files
 //const Home = { template: '<div>Home</div>' }
-const About = { template: '<div>About <router-link to="/">Go to Home</router-link></div>' }
+//const About = { template: '<div>About <router-link to="/">Go to Home</router-link></div>' }
 
 // 2. Define some routes
 // Each route should map to a component.
@@ -25,7 +30,14 @@ const router = createRouter({
   routes, // short for `routes: routes`
 })
 
-const app = createApp(Index)
+const app = createApp({
+  setup () {
+    //provide(DefaultApolloClient, apolloClient)
+  },
+  
+  render: () => h(Index),
+})
+app.provide(DefaultApolloClient, apolloClient)
 app.use(router)
 
 app.mount('#app')

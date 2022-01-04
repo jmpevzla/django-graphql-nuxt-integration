@@ -42,6 +42,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     'graphene_django',
     'movies',
     'graphene_schema',
@@ -51,12 +52,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webpack_loader'
+    'webpack_loader',
+    'tasks'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -65,6 +68,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'DjangoGraphql.urls'
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 TEMPLATES = [
     {
@@ -103,7 +108,8 @@ DATABASES = {
 
 # GraphQL
 GRAPHENE = {
-    'SCHEMA': 'graphene_schema.schema.schema'
+    #'SCHEMA': 'graphene_schema.schema.schema'
+    'SCHEMA': 'DjangoGraphql.schema.schema'
 }
 
 # Password validation

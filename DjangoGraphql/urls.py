@@ -44,15 +44,16 @@ urlpatterns = [
     url(r'^css/(?P<path>.*)$', serve,
         {'document_root': os.path.join(settings.VUE_ROOT, 'css')}),
     url(r'^fonts/(?P<path>.*)$', serve,
-        {'document_root': os.path.join(settings.VUE_ROOT, 'fonts')}),
-
-
-    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
-    url(r'^.*$', TemplateView.as_view(template_name='index.html')),
+        {'document_root': os.path.join(settings.VUE_ROOT, 'fonts')}),   
 ]
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
+        path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
+
+urlpatterns += [
+        url(r'^.*$', TemplateView.as_view(template_name='index.html')),    
+    ] 
