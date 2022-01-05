@@ -47,13 +47,16 @@ urlpatterns = [
         {'document_root': os.path.join(settings.VUE_ROOT, 'fonts')}),   
 ]
 
+graphiql = False
+
 if settings.DEBUG:
     import debug_toolbar
+    graphiql = True
     urlpatterns = [
-        path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
 
 urlpatterns += [
+        path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=graphiql))),
         url(r'^.*$', TemplateView.as_view(template_name='index.html')),    
     ] 
